@@ -1,5 +1,20 @@
-.app-container button{
-	position:absolute;
-	left:10%;
-	top:20%;
+.start-button{
+/*	left:20%;
+	top:70%;*/
+}
+.share-button{
+	width:40px;
+	height:14px;
+	background-image:url('../images/spritesheet.png');
+	background-position:-242px -197px;
+	border:none;
+/*	left:50%;
+	top:70%;*/
+}
+.canvas-class{
+	margin: 0 auto;
+}
+.game-cover{
+	display: inline-block;
+	position: relative;
 }

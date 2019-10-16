@@ -1,3 +1,37 @@
 .app-container{
+	position:relative;
 	
+}
+.app-container span{
+	display:inline-block;
+	color:white;
+	font-size:20px;
+}
+.scoreBoard{
+	position:absolute;
+	bottom:0%;
+}
+.starting{
+	position:absolute;
+	top:70%;
+	left:30%;
+	transform: scale(2);
+}
+.start-button{
+	width:40px;
+	height:14px;
+	background-image:url('../images/spritesheet.png');
+/*	background-repeat: no-repeat;
+	background-attachment: fixed;*/
+	background-position:-242px -213px;
+	border:none;
+	color:white;
+}
+.draw-class{
+	background-image: url('../images/carlogo.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.restarting-button{
+	display:none;
 }

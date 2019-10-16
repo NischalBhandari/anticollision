@@ -1,12 +1,12 @@
-function walls(image){
-	this.canvas=document.getElementById('canvas');
-	this.ctx=this.canvas.getContext('2d');
+function walls(image,canvas,ctx){
+	this.canvas=canvas;
+	this.ctx=ctx;
 	this.wallWidth=20;
 	this.wallHeight=Math.floor(Math.random()*(200-100)+200);
 	this.x=this.canvas.width-this.wallWidth;
 	this.y=0;
 	this.image=image;
-	this.gap=150;
+	this.gap=200;
 	this.dx=-3;
 	this.dy=0;
 	var that=this;
