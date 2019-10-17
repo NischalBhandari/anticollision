@@ -122,7 +122,7 @@ function gameLoop(id){
 
 
 new gameLoop(0);
-/*new gameLoop(1);*/
+new gameLoop(1);
 
 
 

@@ -2,13 +2,15 @@ function walls(image,canvas,ctx){
 	this.canvas=canvas;
 	this.ctx=ctx;
 	this.wallWidth=60;
-	this.wallHeight=Math.floor(Math.random()*(200-100)+200);
-	this.x=this.canvas.width-this.wallWidth;
+	this.numMax=150;
+	this.numMin=20;
+	this.wallHeight=Math.floor(Math.random()*((this.numMax-this.numMin)+this.numMax));
+	this.x=this.canvas.width+3*this.wallWidth;
 	this.y=0;
 	this.image=image;
 	this.isScoring=true;
 	this.groundHeight=56;
-	this.gap=200;
+	this.gap=150;
 	this.dx=-3;
 	this.dy=0;
 	var that=this;
@@ -21,7 +23,7 @@ function walls(image,canvas,ctx){
 		this.ctx.fill();
 		this.ctx.beginPath();
 		this.ctx.fillStyle='blue';
-		this.ctx.drawImage(this.image,330,0,26,121,this.x,this.wallHeight+this.gap,this.wallWidth,this.canvas.height-this.wallHeight-this.groundHeight-this.gap);
+		this.ctx.drawImage(this.image,330,0,26,121,this.x,this.y+this.wallHeight+this.gap,this.wallWidth,this.canvas.height-this.wallHeight-this.groundHeight-this.gap);
 		//this.ctx.fillRect(this.x,this.wallHeight+this.gap,25,this.canvas.height-this.wallHeight-this.gap);
 		this.ctx.fill(); 
 		return this;
@@ -39,7 +41,7 @@ function walls(image,canvas,ctx){
 		if(this.x+this.wallWidth<0){
 			this.isScoring=true;
 			this.x=this.canvas.width;
-			this.wallHeight=Math.floor(Math.random()*this.canvas.height/2);
+			this.wallHeight=Math.floor(Math.random()*((this.numMax-this.numMin)+this.numMax));
 		}
 
 	}
