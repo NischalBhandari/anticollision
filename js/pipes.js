@@ -1,11 +1,13 @@
 function walls(image,canvas,ctx){
 	this.canvas=canvas;
 	this.ctx=ctx;
-	this.wallWidth=20;
+	this.wallWidth=60;
 	this.wallHeight=Math.floor(Math.random()*(200-100)+200);
 	this.x=this.canvas.width-this.wallWidth;
 	this.y=0;
 	this.image=image;
+	this.isScoring=true;
+	this.groundHeight=56;
 	this.gap=200;
 	this.dx=-3;
 	this.dy=0;
@@ -14,14 +16,14 @@ function walls(image,canvas,ctx){
 	this.init=function(){
 		this.ctx.beginPath();
 		this.fillStyle='blue';
-		this.ctx.drawImage(this.image,303,0,25,135,this.x,this.y,60,this.wallHeight)
+		this.ctx.drawImage(this.image,303,0,25,135,this.x,this.y,this.wallWidth,this.wallHeight)
 		/*this.ctx.fillRect(this.x,this.y,25,this.wallHeight);*/
 		this.ctx.fill();
 		this.ctx.beginPath();
 		this.ctx.fillStyle='blue';
-		this.ctx.drawImage(this.image,330,0,26,121,this.x,this.wallHeight+this.gap,60,this.canvas.height-this.wallHeight-56-this.gap);
+		this.ctx.drawImage(this.image,330,0,26,121,this.x,this.wallHeight+this.gap,this.wallWidth,this.canvas.height-this.wallHeight-this.groundHeight-this.gap);
 		//this.ctx.fillRect(this.x,this.wallHeight+this.gap,25,this.canvas.height-this.wallHeight-this.gap);
-		this.ctx.fill();
+		this.ctx.fill(); 
 		return this;
 	}
 
@@ -30,8 +32,12 @@ function walls(image,canvas,ctx){
 		this.x+=this.dx;
 		this.init();
 	}
+	this.maintainSpeed=function(){
+		this.dx-=1/1000;
+	}
 	this.collide=function(){
-		if(this.x+80<0){
+		if(this.x+this.wallWidth<0){
+			this.isScoring=true;
 			this.x=this.canvas.width;
 			this.wallHeight=Math.floor(Math.random()*this.canvas.height/2);
 		}
@@ -51,12 +57,21 @@ function walls(image,canvas,ctx){
 		   ball.y < this.wallHeight+this.gap + this.canvas.height-this.wallHeight-this.gap &&
 		   ball.y + ball.diameter > this.wallHeight+this.gap
 		   ){
-				console.log("testing");
 				return false;
 			}
 			else{
 				return true;
 			}
 
+	}
+
+	this.calculateScore=function(){
+		if(this.x<40 && this.isScoring){
+			this.isScoring=false;
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }

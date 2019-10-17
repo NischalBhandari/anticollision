@@ -5,13 +5,13 @@
 .app-container span{
 	display:inline-block;
 	color:white;
-	font-size:20px;
 }
 .scoreBoard{
 	position:absolute;
 	bottom:0%;
 }
 .starting{
+	display:none;
 	position:absolute;
 	top:70%;
 	left:30%;

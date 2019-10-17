@@ -1,6 +1,5 @@
 function draw(ballRadius,canvas,ctx){
 	this.canvas=canvas;
-	this.isUp=false;
 	var that=this;
 	this.ctx=ctx;
 	this.ballRadius=ballRadius;

@@ -18,3 +18,25 @@
 	display: inline-block;
 	position: relative;
 }
+.game-over{
+	display:none;
+	width:94px;
+	height:20px;
+	position: absolute;
+	left:35%;
+	top:30%;
+	transform:scale(3);
+	background-image:url('../images/spritesheet.png');
+	background-position: -146px -199px;
+}
+.score-container{
+	width:40px;
+	height:20px;
+	position: absolute;
+	left:40%;
+	top:20%;
+}
+.score{
+	font-size:50px;
+	font-weight:bold;
+}

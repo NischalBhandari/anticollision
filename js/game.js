@@ -10,10 +10,17 @@ function gameLoop(id){
 	this.startButton=this.startClass[this.id];
 	this.startMenuClass=document.getElementsByClassName('starting');
 	this.startMenu=this.startMenuClass[this.id];
+	this.gameOverClass= document.getElementsByClassName('game-over');
+	this.gameOver=this.gameOverClass[this.id];
+	this.scoreClass=document.getElementsByClassName('score');
+	this.scoreContainer=this.scoreClass[this.id];
 	this.image=new Image();
+	this.speedControl=0;
 	this.game=true;
 	this.fall=true;
-	this.hasGravity=false;
+	this.start=false;
+	this.score=0; 
+	this.maintainScore=0;
 	this.image.src='./images/spritesheet.png';
 	this.createWall=false;
 	this.myLoop=new draw(20,this.canvas,this.ctx).init();
@@ -26,13 +33,16 @@ function gameLoop(id){
 	document.addEventListener("keydown",keyUpHandler,false);
 	document.addEventListener("keyup",keyUpStopHandler,false);
 	this.startButton.onclick=function(){
+		if(!that.game || !that.fall){
 		new gameLoop(that.id);
+		that.scoreContainer.innerHTML=0;
 		that.startMenu.style.display="none";
+		that.gameOver.style.display="none";
+		}
 
 	}
 	var interval=setInterval(function(){
 		that.ctx.clearRect(0,0,that.canvas.width,that.canvas.height);
-		console.log("done this",that.id);
 		that.ctx.drawImage(that.image,0,0,144,250,0,0,this.canvas.width,this.canvas.height);
 		that.ctx.fillStyle="black";
 		that.myGround.move();
@@ -40,40 +50,50 @@ function gameLoop(id){
 			this.createWall=true;
 		},1000);
 		that.myLoop.update();
-	if(that.hasGravity){
+	if(that.start){
+		that.startMenu.style.display="none";
+		that.gameOver.style.display="none";
 		if(that.movement.up){
-			that.myLoop.isUp=true;
-			setTimeout(function(){
-				that.myLoop.isUp=false;
-			},3000);
-			
 			that.myLoop.moveUp();
 		}
 		if(this.createWall){
 		that.myWall.init();
 		that.myWall.moveWall();
 		that.myWall.collide();
+		that.maintainScore=that.myWall.calculateScore();
+		if(that.maintainScore){
+			that.score+=1;
+
+			that.scoreContainer.innerHTML=that.score;
+			console.log(that.score);
 		}
+		if(that.speedControl%100000==0){
+			that.myWall.maintainSpeed();
+			that.myGround.maintainSpeed();
+		}
+
+		}
+
 		
 
 		that.myLoop.gravity();
 		that.fall=that.myLoop.collide();
-		console.log("returned",that.game);
 		}
 
 		that.game = that.myWall.ballCollide(that.myLoop);
-		console.log(that.game);
 		if(!that.game ){
 
 			that.createWall=false;
 			that.myLoop.fallDead();
 			clearInterval(interval);
 			that.startMenu.style.display="block";
+			that.gameOver.style.display="block";
 		}
 		else if(!that.fall){
-			that.hasGravity=false;
+			that.start=false;
 			clearInterval(interval);
-			console.log("game finished");
+			that.startMenu.style.display="block";
+			that.gameOver.style.display="block";
 		}
 		
 	},10);
@@ -91,9 +111,8 @@ function gameLoop(id){
 		}
 	}
 	function keyUpStopHandler(e){
-		console.log("up pressed");
 			if(e.key=="Up"||e.key=="ArrowUp"||e.keyCode==32){
-			that.hasGravity=true;
+			that.start=true;
 			that.movement.up=false;
 		}
 	}
