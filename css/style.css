@@ -40,3 +40,9 @@
 	font-size:50px;
 	font-weight:bold;
 }
+.high-score{
+	color:black !important;
+}
+.starting span{
+	color: black !important;
+}

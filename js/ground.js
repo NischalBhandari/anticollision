@@ -4,7 +4,7 @@ function ground(image,canvas,ctx){
 	this.ctx=ctx;
 	this.x=0;
 	this.y=0;
-	this.dx=3;
+	this.dx=1;
 	this.x2=this.canvas.width-2;
 	this.y2=0;
 

@@ -4,7 +4,7 @@ function draw(ballRadius,canvas,ctx){
 	this.ctx=ctx;
 	this.ballRadius=ballRadius;
 	this.diameter=this.ballRadius*2;
-	this.dy=-5;
+	this.dy=-3;
 	var that=this;
 	this.dx=0;
 	this.isFalling=false;

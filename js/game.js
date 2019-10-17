@@ -1,4 +1,5 @@
 ;(function(){
+	var highScore=0;
 
 function gameLoop(id){
 	this.canvasClass=document.getElementsByClassName('canvas-class');
@@ -6,6 +7,8 @@ function gameLoop(id){
 	this.canvas=this.canvasClass[this.id];
 	this.ctx=this.canvas.getContext('2d');
 	var that=this;
+	this.highScoreClass=document.getElementsByClassName('high-score');
+	this.highScore=this.highScoreClass[this.id];
 	this.startClass=document.getElementsByClassName('start-button');
 	this.startButton=this.startClass[this.id];
 	this.startMenuClass=document.getElementsByClassName('starting');
@@ -39,6 +42,7 @@ function gameLoop(id){
 		that.startMenu.style.display="none";
 		that.gameOver.style.display="none";
 		}
+		that.startMenu.style.display="none";
 
 	}
 	var interval=setInterval(function(){
@@ -63,7 +67,9 @@ function gameLoop(id){
 		that.maintainScore=that.myWall.calculateScore();
 		if(that.maintainScore){
 			that.score+=1;
-
+			if(that.score>parseInt(that.highScore.innerHTML)){
+				that.highScore.innerHTML=that.score;
+			}
 			that.scoreContainer.innerHTML=that.score;
 			console.log(that.score);
 		}

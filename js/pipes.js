@@ -11,7 +11,7 @@ function walls(image,canvas,ctx){
 	this.isScoring=true;
 	this.groundHeight=56;
 	this.gap=150;
-	this.dx=-3;
+	this.dx=-1;
 	this.dy=0;
 	var that=this;
 
