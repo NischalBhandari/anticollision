@@ -35,6 +35,8 @@ function gameLoop(id){
 	document.addEventListener("keydown",keyDownHandler,false);
 	document.addEventListener("keydown",keyUpHandler,false);
 	document.addEventListener("keyup",keyUpStopHandler,false);
+	document.addEventListener("touchstart",keyClickHandler,false);
+	document.addEventListener("touchend",keyClickEnded,false);
 	this.startButton.onclick=function(){
 		if(!that.game || !that.fall){
 		new gameLoop(that.id);
@@ -103,7 +105,17 @@ function gameLoop(id){
 		}
 		
 	},10);
+	function keyClickHandler(e){
+		console.log("clicked");
+		that.movement.up=true;
 
+
+	}
+
+	function keyClickEnded(){
+			that.start=true;
+			that.movement.up=false;
+	}
 	function keyDownHandler(e){
 		if(e.key=="Up"||e.key=="ArrowUp" ||e.keyCode==32){
 			/*that.myLoop.moveUp();*/
