@@ -106,6 +106,7 @@ function gameLoop(id){
 		
 	},10);
 	function keyClickHandler(e){
+		e.preventDefault();
 		console.log("clicked");
 		that.movement.up=true;
 
